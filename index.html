@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header__left">
+      <div id="clock" class="clock"></div>
+      <div id="date-display" class="date-display"></div>
+    </div>
+    <div class="header__right">
+      <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light mode">
+        <span class="theme-toggle__track">
+          <span class="theme-toggle__thumb"></span>
+        </span>
+        <span id="theme-icon" class="theme-toggle__text">Dark Mode</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== GREETING ===== -->
+  <section class="greeting-section">
+    <h1 id="greeting-text" class="greeting"></h1>
+    <div class="name-row">
+      <span id="greeting-name" class="greeting-name"></span>
+      <button id="edit-name-btn" class="btn btn--ghost btn--sm" title="Change your name">Edit Name</button>
+    </div>
+    <!-- Name modal -->
+    <div id="name-modal" class="modal hidden">
+      <div class="modal__card">
+        <h2 class="modal__title">What's your name?</h2>
+        <input id="name-input" class="input" type="text" placeholder="Enter your name" maxlength="40" />
+        <div class="modal__actions">
+          <button id="name-cancel-btn" class="btn btn--ghost">Cancel</button>
+          <button id="name-save-btn" class="btn btn--add">Save</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAIN GRID ===== -->
+  <main class="dashboard-grid">
+
+    <!-- FOCUS TIMER -->
+    <section class="card timer-card">
+      <div class="card__header">
+        <h2 class="card__title">Focus Timer</h2>
+      </div>
+
+      <div class="timer-duration-row">
+        <label class="timer-duration-label" for="pomodoro-minutes">Session (minutes):</label>
+        <div class="timer-duration-input-group">
+          <input id="pomodoro-minutes" class="input input--sm" type="number" min="1" max="180" value="25" />
+          <button id="apply-duration-btn" class="btn btn--ghost btn--sm">Apply</button>
+        </div>
+      </div>
+
+      <div class="timer-display-box">
+        <div id="timer-display" class="timer-display">25:00</div>
+      </div>
+      <div class="timer-controls">
+        <button id="timer-start" class="btn btn--start">Start</button>
+        <button id="timer-stop"  class="btn btn--stop">Stop</button>
+        <button id="timer-reset" class="btn btn--ghost">Reset</button>
+      </div>
+      <p id="timer-status" class="timer-status">Ready</p>
+    </section>
+
+    <!-- TO-DO LIST -->
+    <section class="card todo-card">
+      <div class="card__header">
+        <h2 class="card__title">To-Do List</h2>
+      </div>
+
+      <div class="todo-add-row">
+        <input id="todo-input" class="input" type="text" placeholder="Add a new task…" maxlength="120" />
+        <button id="todo-add-btn" class="btn btn--add">Add</button>
+      </div>
+
+      <div class="todo-sort-row">
+        <span class="sort-label">Sort:</span>
+        <div class="sort-segmented-control">
+          <button id="sort-none"   class="sort-btn active-sort" data-sort="none">Default</button>
+          <button id="sort-az"     class="sort-btn" data-sort="az">A–Z</button>
+          <button id="sort-za"     class="sort-btn" data-sort="za">Z–A</button>
+          <button id="sort-status" class="sort-btn" data-sort="status">By Status</button>
+        </div>
+      </div>
+
+      <ul id="todo-list" class="todo-list"></ul>
+      <p id="todo-empty" class="empty-hint">No tasks yet. Add one above!</p>
+    </section>
+
+    <!-- QUICK LINKS -->
+    <section class="card links-card">
+      <div class="card__header">
+        <h2 class="card__title">Quick Links</h2>
+      </div>
+
+      <div class="links-add-row">
+        <input id="link-name-input" class="input" type="text" placeholder="Label" maxlength="40" />
+        <input id="link-url-input"  class="input" type="url"  placeholder="https://…" />
+        <button id="link-add-btn" class="btn btn--add">Add</button>
+      </div>
+
+      <div id="links-grid" class="links-grid"></div>
+      <p id="links-empty" class="empty-hint">No links yet. Add one above!</p>
+    </section>
+
+  </main>
+
+  <!-- ===== EDIT TASK MODAL ===== -->
+  <div id="edit-modal" class="modal hidden">
+    <div class="modal__card">
+      <h2 class="modal__title">Edit Task</h2>
+      <input id="edit-task-input" class="input" type="text" maxlength="120" />
+      <div class="modal__actions">
+        <button id="edit-cancel-btn" class="btn btn--ghost">Cancel</button>
+        <button id="edit-save-btn"   class="btn btn--add">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DUPLICATE WARNING TOAST ===== -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
